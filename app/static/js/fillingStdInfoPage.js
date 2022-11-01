@@ -64,6 +64,9 @@ function fetchStudents() {
                 );
                 return;
             }
+            alert(
+                "تــمــت إضــافة المعلومات بنجاح إنتظر قليلا وستظهر التحديثات"
+            );
             let studentInfo = responseJson;
             let tbody = document.querySelector("tbody");
             let numsOfStudents = Object.keys(studentInfo);
