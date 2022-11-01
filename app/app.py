@@ -73,7 +73,7 @@ def fillingStdRecords_view():
     return render_template('fillingStdRecordsPage.html')
 
 
-@app.route("/reportPage")
+@app.route("/report")
 @limiter.exempt
 def reportPage_view():
     return render_template('reportPage.html')
