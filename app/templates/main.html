@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رصــــد | سجلات الطلاب</title>
+    <title>رصــــد | الصفحة الرئيسية</title>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,36 +16,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/fillingStdRecordsPage.css">
+    <link rel="stylesheet" href="../static/css/fillingStdInfoPage.css">
 </head>
 
 <body>
-    <ul class="nav justify-content-center nav-tabs" style="background-color:#14521c;">
+    <ul class="nav  justify-content-center nav-tabs" style="background-color:#14521c;">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="main.html">الرئيسية</a>
+            <a class="nav-link active" aria-current="page" href="#">الرئيسية</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="fillingStdInfoPage.html">بيانات الطلاب</a>
+            <a class="nav-link" aria-current="page" href="fillingStdInfoPage.html">بيانات الطلاب</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">سجلات الطلاب</a>
+            <a class="nav-link" href="fillingStdRecordsPage.html">سجلات الطلاب</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="ReportPage.html">التقارير</a>
         </li>
     </ul>
+
     <div class="innerBody container mt-5 mb-5 d-flex justify-content-center flex-wrap">
         <!-------------------------------------------->
         <!-------------------------------------------->
-        <div id="formsContainer" class="container mt-2 mb-3 d-flex justify-content-center">
-            <h3 class="mb-3 mt-5">الرجاء إدخال سجل الطلاب</h3>
-            <!-- HERE WILL BE THE FORMS-->
-
+        <h3 class="mb-3 mt-5">بيانات الطلاب</h3>
+        <div style="width: 100%;  display: flex;  justify-content: center;">
+            <div class="studentForms card px-1 py-4" style="border: black 0.5px solid; ">
+                <div class="card-body">
+                    ستضاف التفاصيل قريبا...<br><br>استعمل الشريط في الأعلى للتنقل
+                </div>
+            </div>
         </div>
         <!-------------------------------------------->
         <!-------------------------------------------->
     </div>
-    <script src="../static/js/fillingStdRecordsPage.js"></script>
+
+    <script src="../static/js/main.js "></script>
 </body>
 
 </html>
