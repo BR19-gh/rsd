@@ -6,7 +6,7 @@
 
   
 
-A full-stack Recording Students Degrees System that ..., The store uses Flask as its backend, PostgreSQL as database, and CSS, HTML, JS/TS and Bootstrap as its Frontend
+A full-stack Recording Students Degrees System that record students daily revising and memorising of Quran, The store uses Flask as its backend, PostgreSQL as database, and CSS, HTML, JS/TS and Bootstrap as its Frontend
   
 
 The application is deployed on Heroku and can be accessed at <br> [RSD-br19.herokuapp.com](https://RSD-br19.herokuapp.com)
