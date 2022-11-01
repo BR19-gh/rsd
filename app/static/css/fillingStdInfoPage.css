@@ -1,0 +1,186 @@
+body {
+    background-color: #FFEBEE
+}
+
+.card {
+    width: 400px;
+    background-color: #fff;
+    border: none;
+    border-radius: 12px
+}
+
+label.radio {
+    cursor: pointer;
+    width: 100%
+}
+
+label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.radio span {
+    padding: 7px 14px;
+    border: 2px solid #eee;
+    display: inline-block;
+    color: #039be5;
+    border-radius: 10px;
+    width: 100%;
+    height: 48px;
+    line-height: 27px
+}
+
+label.radio input:checked+span {
+    border-color: #039BE5;
+    background-color: #81D4FA;
+    color: #fff;
+    border-radius: 9px;
+    height: 48px;
+    line-height: 27px
+}
+
+.form-control {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    border: 2px solid #eee;
+    border-radius: 10px
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #039BE5
+}
+
+.agree-text {
+    font-size: 12px
+}
+
+.terms {
+    font-size: 12px;
+    text-decoration: none;
+    color: #039BE5
+}
+
+.confirm-button {
+    height: 50px;
+    border-radius: 10px
+}
+
+.btnContainer {
+    display: flex;
+    /* position: sticky; */
+    justify-content: center;
+}
+
+#formsContainer {
+    margin: 0px !important;
+    display: flex !important;
+    flex-wrap: wrap;
+}
+
+.studentForms {
+    width: 100%;
+    /* height: 100%; */
+    /* margin-bottom: 55px; */
+    /* background-image: linear-gradient(to top right, #88df94, #dbc68a); */
+    background-color: #ffffff86;
+    transition: all 100ms ease-in-out;
+}
+
+.studentForms:hover,
+.studentForms:focus {
+    background-color: #ffffff9c;
+    border-radius: 2%;
+}
+
+.innerBody {
+    background-image: linear-gradient(to top right, #14521cee, #ad8000ee);
+    margin: auto !important;
+    padding: 10px 25px 70% 25px;
+    width: 100%;
+    /* height: 16%; */
+}
+
+body {
+    background-color: /*#77a8c8*/
+    black;
+    /* display: flex; */
+    /* justify-content: center; */
+    background-image: url(../img/bg.jpg);
+    background-size: contain;
+}
+
+.card-body {
+    padding: 0px !important;
+}
+
+.icon:hover {
+    font-size: 20px;
+}
+
+.modal {
+    backdrop-filter: blur(10px) contrast(100%);
+    -webkit-backdrop-filter: blur(10px) contrast(100%);
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.modal-footer,
+.modal-header {
+    border-color: #14521c;
+    padding: 0.5rem 0.5rem;
+}
+
+.modal-backdrop.fade {
+    display: none;
+}
+
+.studentModal {
+    width: 360px;
+    height: 600px;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    justify-content: center;
+    top: 3px;
+}
+
+.studentLabels {
+    font-size: 15px;
+}
+
+.form-check-inline {
+    display: inline-block;
+    margin-left: 0rem;
+}
+
+.nav {
+    /* margin-bottom: 0px; */
+    padding-bottom: 1px;
+    width: 100% !important;
+    position: fixed;
+    z-index: 10;
+    border-color: #14521c;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #509575;
+    border-color: #000000 #000000 #00000000;
+}
+
+.nav-link {
+    color: #ffffff;
+}
+
+input {
+    text-align: center;
+}
