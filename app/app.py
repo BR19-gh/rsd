@@ -45,14 +45,14 @@ limiter = Limiter(
 ####################
 @app.route("/")
 @limiter.exempt
-def fillingStdInfo_view():
+def main_view():
 
 
     return render_template('main.html')
-    
+
 @app.route("/main")
 @limiter.exempt
-def fillingStdInfo_view():
+def main2_view():
 
 
     return render_template('main.html')
