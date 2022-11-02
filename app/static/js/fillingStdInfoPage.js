@@ -28,7 +28,19 @@ const studentInfo = {
     },
 }
 
+
+
 const parts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+
+parts.forEach(part => {
+    document.querySelector("#partsCheckboxs").innerHTML += `
+                <div class="checkboxContainer form-check form-check-inline">
+                    <input class="checkboxLabel form-check-input" type="checkbox" id="checkboxPart-${part}" value="${part}">
+                    <label class="checkboxLabel form-check-label" ">الجزء ${part}</label>
+                            </div>
+                        `;
+});
+
 
 // how to spell جزءs
 const جزء = (num) => {
@@ -36,6 +48,16 @@ const جزء = (num) => {
     if (num == 1 || num > 10) return `${num} جزء`;
     else if (num == 2) return "جزءان";
     else return `${num} أجزاء`;
+}
+
+const countPartsMemo = (id) => {
+    let finalResult;
+    parts.forEach(part => {
+        if (document.querySelector(`checkboxPart-${part}`).checked == true) {
+            finalResult.push(part);
+        }
+    });
+    return finalResult;
 }
 
 
@@ -60,13 +82,11 @@ function fetchStudents() {
             }
             if (responseJson.statCode == 429) {
                 alert(
-                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-admin"
+                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
                 );
                 return;
             }
-            alert(
-                "تــمــت إضــافة المعلومات بنجاح إنتظر قليلا وستظهر التحديثات"
-            );
+
             let studentInfo = responseJson;
             let tbody = document.querySelector("tbody");
             let numsOfStudents = Object.keys(studentInfo);
@@ -79,10 +99,10 @@ function fetchStudents() {
                     <td>${studentInfo[numOfStudent].name}</td>
                     <td>${جزء(studentInfo[numOfStudent].partsTotal.length)}</td>
                     <td>
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit')"> 
+                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit', ${studentInfo})"> 
                             <i class="icon fas fa-edit"></i> 
-                        </div> 
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete')"> 
+                        </div>
+                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete', ${studentInfo})"> 
                             <i class="icon fas fa-trash-alt"></i> 
                         </div> 
                     </td>                      
@@ -95,7 +115,7 @@ function fetchStudents() {
         })
         .catch((error) => {
             alert(
-                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 514\n err-fetch-admin: products\n التاريخ: ${formatTheDate(
+                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 514\n err-fetch-info: products\n التاريخ: ${formatTheDate(
                     new Date(), 1
                 )}`
             );
@@ -106,32 +126,26 @@ function fetchStudents() {
 document.querySelector("#addstudent").addEventListener("click", () => {
 
     if (
-        document.querySelector("#productID").value == "" ||
-        document.querySelector("#productTitle").value == "" ||
-        document.querySelector("#productPrice").value == "" ||
-        document.querySelector("#productImg").value == ""
+        document.querySelector("#studentID").value == "" ||
+        document.querySelector("#studentName").value == ""
     ) {
         alert("يجب ملئ جميع الخانات أولا");
         setTimeout(() => {
-            $("#productModal").modal("show");
+            $("#studentModal").modal("show");
         }, 200);
         return;
     }
-    fetch("/product", {
+    fetch("/student", {
             headers: {
-                id: encodeURIComponent(document.querySelector("#productID").value),
-                title: encodeURIComponent(
-                    document.querySelector("#productTitle").value
+                id: encodeURIComponent(document.querySelector("#studentID").value),
+                name: encodeURIComponent(
+                    document.querySelector("#studentName").value
                 ),
-                price: encodeURIComponent(
-                    document.querySelector("#productPrice").value
+                partsTotal: encodeURIComponent(
+                    countPartsMemo(document.querySelector("#studentID").value)
                 ),
-                avail: encodeURIComponent(
-                    `${document.querySelector("#productAvail").checked}`
-                )
             },
             method: "POST",
-            body: uploadImgForm
         })
         .then((response) => {
             return response.json();
@@ -139,31 +153,31 @@ document.querySelector("#addstudent").addEventListener("click", () => {
         .then((responseJson) => {
             if (responseJson.statCode == 403) {
                 alert(
-                    "الرقم التعريفي للمنتج المراد إضافته موجود مسبقا\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 403-admin"
-                ) | $("#productModal").modal("show");
+                    "الرقم التعريفي للطالب المراد إضافته موجود مسبقا\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 403-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 400) {
                 alert(
-                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أو السعر أُدخل فيه نص، يجب إدخالها على شكل رقم فقط. \n\n ErrCode: 400-admin"
-                ) | $("#productModal").modal("show");
+                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 429) {
                 alert(
-                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-admin"
-                ) | $("#productModal").modal("show");
+                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 500) {
                 alert(
-                    "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 530-admin"
-                ) | $("#productModal").modal("show");
+                    "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 530-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
 
             alert(
-                `تم إضافة المنتج رقم ${document.querySelector("#productID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`
+                `تم إضافة المنتج رقم ${document.querySelector("#studentID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`
             );
             fetchProducts();
             document.querySelector("#productID").value = "";
@@ -174,7 +188,7 @@ document.querySelector("#addstudent").addEventListener("click", () => {
         })
         .catch((error) => {
             alert(
-                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 516\n err-fetch-admin: product\n التاريخ: ${formatTheDate(
+                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 516\n err-fetch-info: product\n التاريخ: ${formatTheDate(
                     new Date(), 1
                 )}`
             );
@@ -189,7 +203,7 @@ document.querySelector("#updstudent").addEventListener("click", () => {
     ) {
         alert("يجب ملئ جميع الخانات أولا");
         setTimeout(() => {
-            $("#productModal").modal("show");
+            $("#studentModal").modal("show");
         }, 200);
         return;
     }
@@ -214,26 +228,26 @@ document.querySelector("#updstudent").addEventListener("click", () => {
         .then((responseJson) => {
             if (responseJson.statCode == 404) {
                 alert(
-                    "الرقم التعريفي للمنتج المراد تحديثه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-admin"
-                ) | $("#productModal").modal("show");
+                    "الرقم التعريفي للمنتج المراد تحديثه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 400) {
                 alert(
-                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أو السعر أُدخل فيه نص، يجب إدخالها على شكل رقم فقط. \n\n ErrCode: 400-admin"
-                ) | $("#productModal").modal("show");
+                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أو السعر أُدخل فيه نص، يجب إدخالها على شكل رقم فقط. \n\n ErrCode: 400-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 429) {
                 alert(
-                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-admin"
-                ) | $("#productModal").modal("show");
+                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 500) {
                 alert(
-                    "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 531-admin"
-                ) | $("#productModal").modal("show");
+                    "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 531-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
 
@@ -249,7 +263,7 @@ document.querySelector("#updstudent").addEventListener("click", () => {
         })
         .catch((error) => {
             alert(
-                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 517\n err-fetch-admin: product\n التاريخ: ${formatTheDate(
+                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 517\n err-fetch-info: product\n التاريخ: ${formatTheDate(
                     new Date(), 1
                 )}`
             );
@@ -272,26 +286,26 @@ document.querySelector("#delstudent").addEventListener("click", () => {
         .then((responseJson) => {
             if (responseJson.statCode == 404) {
                 alert(
-                    "الرقم التعريفي للمنتج المراد حذفه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-admin"
-                ) | $("#productModal").modal("show");
+                    "الرقم التعريفي للمنتج المراد حذفه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 400) {
                 alert(
-                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-admin"
-                ) | $("#productModal").modal("show");
+                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 429) {
                 alert(
-                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-admin"
-                ) | $("#productModal").modal("show");
+                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 500) {
                 alert(
-                    "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 532-admin"
-                ) | $("#productModal").modal("show");
+                    "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 532-info"
+                ) | $("#studentModal").modal("show");
                 return;
             }
 
@@ -308,7 +322,7 @@ document.querySelector("#delstudent").addEventListener("click", () => {
 
 
 
-const deleteOrEditstudent = (id, opration) => {
+const deleteOrEditstudent = (id, opration, studentInfo) => {
 
     (parts).forEach(part => {
         document.querySelector(`#checkboxPart-${part}`).checked = false;
@@ -373,21 +387,14 @@ const deleteOrEditstudent = (id, opration) => {
         });
     } else {
         alert(
-            "هناك خطأ ما،  تواصل مع المطور لحل المشكلة. \n\n ErrCode: 558-admin"
+            "هناك خطأ ما،  تواصل مع المطور لحل المشكلة. \n\n ErrCode: 558-info"
         );
     }
 }
 
 
 
-parts.forEach(part => {
-    document.querySelector("#partsCheckboxs").innerHTML += `
-                <div class="checkboxContainer form-check form-check-inline">
-                    <input class="checkboxLabel form-check-input" type="checkbox" id="checkboxPart-${part}" value="${part}">
-                    <label class="checkboxLabel form-check-label" ">الجزء ${part}</label>
-                            </div>
-                        `;
-});
+
 
 
 
