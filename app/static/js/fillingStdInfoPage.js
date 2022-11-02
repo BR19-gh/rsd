@@ -1,32 +1,32 @@
 //tempDB
 
-const studentInfo = {
-    "0": {
-        id: "1",
-        name: "إبراهيم الخويطر",
-        partsTotal: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-    },
-    "1": {
-        id: "2",
-        name: "فلان الفلاني",
-        partsTotal: [29, 30]
-    },
-    "2": {
-        id: "3",
-        name: "حسام الفايزي",
-        partsTotal: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-    },
-    "3": {
-        id: "4",
-        name: "عبدالرحمن الخزيم",
-        partsTotal: [22, 23, 24, 25, 26, 27, 28, 29, 30, 3, 1, 6, 2]
-    },
-    "5": {
-        id: "5",
-        name: "علان العلاني",
-        partsTotal: [30]
-    },
-}
+// const studentInfo = {
+//     "0": {
+//         id: "1",
+//         name: "إبراهيم الخويطر",
+//         partsTotal: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+//     },
+//     "1": {
+//         id: "2",
+//         name: "فلان الفلاني",
+//         partsTotal: [29, 30]
+//     },
+//     "2": {
+//         id: "3",
+//         name: "حسام الفايزي",
+//         partsTotal: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+//     },
+//     "3": {
+//         id: "4",
+//         name: "عبدالرحمن الخزيم",
+//         partsTotal: [22, 23, 24, 25, 26, 27, 28, 29, 30, 3, 1, 6, 2]
+//     },
+//     "5": {
+//         id: "5",
+//         name: "علان العلاني",
+//         partsTotal: [30]
+//     },
+// }
 
 
 
@@ -327,11 +327,13 @@ const deleteOrEditstudent = (id, opration, studentInfo) => {
     (parts).forEach(part => {
         document.querySelector(`#checkboxPart-${part}`).checked = false;
     });
-    (studentInfo[id].partsTotal).forEach(part => {
-        document.querySelector(`#checkboxPart-${part}`).checked = true;
-    });
 
     if (opration == "edit") {
+
+        (studentInfo[id].partsTotal).forEach(part => {
+            document.querySelector(`#checkboxPart-${part}`).checked = true;
+        });
+
         // show btn
         document.querySelector("#addstudent").style.display = "none";
         document.querySelector("#updstudent").style.display = "block";
@@ -349,6 +351,11 @@ const deleteOrEditstudent = (id, opration, studentInfo) => {
             document.querySelector(`#checkboxPart-${part}`).disabled = false;
         });
     } else if (opration == "delete") {
+
+        (studentInfo[id].partsTotal).forEach(part => {
+            document.querySelector(`#checkboxPart-${part}`).checked = true;
+        });
+
         // show btn
         document.querySelector("#addstudent").style.display = "none";
         document.querySelector("#updstudent").style.display = "none";
