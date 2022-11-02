@@ -53,7 +53,7 @@ const جزء = (num) => {
 const countPartsMemo = (id) => {
     let finalResult;
     parts.forEach(part => {
-        if (document.querySelector(`checkboxPart-${part}`).checked == true) {
+        if (document.querySelector(`#checkboxPart-${part}`).checked == true) {
             finalResult.push(part);
         }
     });
