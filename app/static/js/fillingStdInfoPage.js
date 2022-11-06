@@ -124,7 +124,7 @@ function fetchStudents() {
         })
         .catch((error) => {
             alert(
-                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 514\n err-fetch-info: products\n التاريخ: ${formatTheDate(
+                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 514\n err-fetch-info: students\n التاريخ: ${formatTheDate(
                     new Date(), 1
                 )}`
             );
@@ -197,7 +197,7 @@ document.querySelector("#addstudent").addEventListener("click", () => {
         })
         .catch((error) => {
             alert(
-                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 516\n err-fetch-info: product\n التاريخ: ${formatTheDate(
+                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 516\n err-fetch-info: student\n التاريخ: ${formatTheDate(
                     new Date(), 1
                 )}`
             );
@@ -267,7 +267,7 @@ document.querySelector("#updstudent").addEventListener("click", () => {
         })
         .catch((error) => {
             alert(
-                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 517\n err-fetch-info: product\n التاريخ: ${formatTheDate(
+                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 517\n err-fetch-info: student\n التاريخ: ${formatTheDate(
                     new Date(), 1
                 )}`
             );
@@ -276,7 +276,7 @@ document.querySelector("#updstudent").addEventListener("click", () => {
 
 
 document.querySelector("#delstudent").addEventListener("click", () => {
-    fetch(`/product/${document.querySelector("#studentID").value}`, {
+    fetch(`/student/${document.querySelector("#studentID").value}`, {
             headers: {
                 Method: "DELETE",
                 "Content-Type": "application/json",
