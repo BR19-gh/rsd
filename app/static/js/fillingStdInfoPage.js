@@ -335,9 +335,11 @@ const deleteOrEditstudent = (id, opration) => {
 
     if (opration == "edit") {
 
-        (studentInfo[id].partsTotal).forEach(part => {
-            document.querySelector(`#checkboxPart-${part}`).checked = true;
-        });
+        if (studentInfo[id].partsTotal == true) {
+            (studentInfo[id].partsTotal).forEach(part => {
+                document.querySelector(`#checkboxPart-${part}`).checked = true;
+            });
+        } else {}
 
         // show btn
         document.querySelector("#addstudent").style.display = "none";
@@ -357,7 +359,7 @@ const deleteOrEditstudent = (id, opration) => {
         });
     } else if (opration == "delete") {
 
-        if (studentInfo[id].partsTotal) {
+        if (studentInfo[id].partsTotal == true) {
             (studentInfo[id].partsTotal).forEach(part => {
                 document.querySelector(`#checkboxPart-${part}`).checked = true;
             });
