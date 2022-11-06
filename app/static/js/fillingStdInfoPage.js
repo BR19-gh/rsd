@@ -29,6 +29,7 @@
 // }
 
 
+let listOfStudents;
 
 const parts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 
@@ -48,6 +49,10 @@ const جزء = (num) => {
     if (num == 1 || num > 10) return `${num} جزء`;
     else if (num == 2) return "جزءان";
     else return `${num} أجزاء`;
+}
+
+const setListOfStudents = (responseJson) => {
+    listOfStudents = responseJson;
 }
 
 const countPartsMemo = (id) => {
@@ -90,6 +95,7 @@ function fetchStudents() {
             }
 
             let studentInfo = responseJson;
+            setListOfStudents(responseJson)
             let tbody = document.querySelector("tbody");
             let numsOfStudents = Object.keys(studentInfo);
             tbody.innerHTML = '';
@@ -102,10 +108,10 @@ function fetchStudents() {
                     <td>${studentInfo[numOfStudent].name}</td>
                     <td>${جزء(studentInfo[numOfStudent].partsTotal.length)}</td>
                     <td>
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit', ${(JSON.stringify(studentInfo))})"> 
+                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit')"> 
                             <i class="icon fas fa-edit"></i> 
                         </div>
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete', ${(JSON.stringify(studentInfo))})"> 
+                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete')"> 
                             <i class="icon fas fa-trash-alt"></i> 
                         </div> 
                     </td>                      
@@ -320,8 +326,8 @@ document.querySelector("#delstudent").addEventListener("click", () => {
 
 
 
-const deleteOrEditstudent = (id, opration, studentInfo) => {
-    studentInfo = JSON.parse((studentInfo));
+const deleteOrEditstudent = (id, opration) => {
+    let studentInfo = listOfStudents;
     (parts).forEach(part => {
         document.querySelector(`#checkboxPart-${part}`).checked = false;
     });
