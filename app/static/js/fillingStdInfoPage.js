@@ -44,10 +44,10 @@ parts.forEach(part => {
 
 
 // how to spell جزءs
-const جزء = (num) => {
-    if (num == 0) return `لم يحفظ`;
-    if (num == 1) return `جزء واحد`;
-    if (num > 10) return `${num} جزء`;
+const جزء = (num, list) => {
+    if (num == 1 && list == 0) return `لم يحفظ`;
+    else if (num == 1 && list != 0) return `جزء واحد`;
+    else if (num > 10) return `${num} جزء`;
     else if (num == 2) return "جزءان";
     else return `${num} أجزاء`;
 }
@@ -107,7 +107,7 @@ function fetchStudents() {
                 <tr>
                     <th scope="row">${studentInfo[numOfStudent].id}</th>
                     <td>${studentInfo[numOfStudent].name}</td>
-                    <td>${جزء(studentInfo[numOfStudent].partsTotal.length)}</td>
+                    <td>${جزء(studentInfo[numOfStudent].partsTotal.length,studentInfo[numOfStudent].partsTotal)}</td>
                     <td>
                         <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit')"> 
                             <i class="icon fas fa-edit"></i> 
