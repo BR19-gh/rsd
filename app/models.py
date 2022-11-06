@@ -61,8 +61,8 @@ class StudentsTable:
         return self.record
 
 
-    def insert(self, id, name, totalParts):
-        if (id == "" or name == "" or totalParts == ""):
+    def insert(self, id, name, partsTotal):
+        if (id == "" or name == "" or partsTotal == ""):
             raise Exception("One of the entries is empty")
         self.cur.execute(f"""
 
@@ -70,19 +70,19 @@ class StudentsTable:
                             (
                                 id,
                                 name,
-                                totalParts
+                                partsTotal
                             )
                 VALUES
                             {( 
                                 id , 
                                 name, 
-                                totalParts
+                                partsTotal
                             )};
 
                         """)
         self.conn.commit()
 
-    def update(self, id, name, totalParts):
+    def update(self, id, name, partsTotal):
         self.cur.execute(f"""
 
                 UPDATE students 
@@ -93,7 +93,7 @@ class StudentsTable:
         self.cur.execute(f"""
 
                 UPDATE students 
-                SET price = '{totalParts}' 
+                SET price = '{partsTotal}' 
                 WHERE id = '{id}'
 
                         """)
