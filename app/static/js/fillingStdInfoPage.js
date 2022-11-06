@@ -45,8 +45,9 @@ parts.forEach(part => {
 
 // how to spell جزءs
 const جزء = (num) => {
+    if (num == 0) return `لم يحفظ`;
     if (num == 1) return `جزء واحد`;
-    if (num == 1 || num > 10) return `${num} جزء`;
+    if (num > 10) return `${num} جزء`;
     else if (num == 2) return "جزءان";
     else return `${num} أجزاء`;
 }
