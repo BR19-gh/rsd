@@ -179,7 +179,7 @@ document.querySelector("#addstudent").addEventListener("click", () => {
             }
 
             alert(
-                `تم إضافة المنتج رقم ${document.querySelector("#studentID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`
+                `تم إضافة معلومات الطالب رقم ${document.querySelector("#studentID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`
             );
             fetchStudents()
             document.querySelector("#studentID").value = "";
@@ -199,9 +199,7 @@ document.querySelector("#addstudent").addEventListener("click", () => {
 
 document.querySelector("#updstudent").addEventListener("click", () => {
     if (
-        document.querySelector("#productID").value == "" ||
-        document.querySelector("#productTitle").value == "" ||
-        document.querySelector("#productPrice").value == ""
+        document.querySelector("#studentName").value == ""
     ) {
         alert("يجب ملئ جميع الخانات أولا");
         setTimeout(() => {
@@ -209,17 +207,14 @@ document.querySelector("#updstudent").addEventListener("click", () => {
         }, 200);
         return;
     }
-    fetch(`/product/${document.querySelector("#productID").value}`, {
+    fetch(`/student/${document.querySelector("#studentID").value}`, {
             headers: {
-                title: encodeURIComponent(
-                    document.querySelector("#productTitle").value
+                name: encodeURIComponent(
+                    document.querySelector("#studentName").value
                 ),
-                price: encodeURIComponent(
-                    document.querySelector("#productPrice").value
+                partsTotal: encodeURIComponent(
+                    countPartsMemo(document.querySelector("#studentID").value)
                 ),
-                avail: encodeURIComponent(
-                    `${document.querySelector("#productAvail").checked}`
-                )
             },
             method: "PUT"
 
@@ -230,13 +225,13 @@ document.querySelector("#updstudent").addEventListener("click", () => {
         .then((responseJson) => {
             if (responseJson.statCode == 404) {
                 alert(
-                    "الرقم التعريفي للمنتج المراد تحديثه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-info"
+                    "الرقم التعريفي للطالب المراد تحديثه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-info"
                 ) | $("#studentModal").modal("show");
                 return;
             }
             if (responseJson.statCode == 400) {
                 alert(
-                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أو السعر أُدخل فيه نص، يجب إدخالها على شكل رقم فقط. \n\n ErrCode: 400-info"
+                    "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-info"
                 ) | $("#studentModal").modal("show");
                 return;
             }
@@ -254,14 +249,14 @@ document.querySelector("#updstudent").addEventListener("click", () => {
             }
 
             alert(
-                `تم تعديل المنتج رقم ${document.querySelector("#productID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`
+                `تم تعديل معلومات الطالب رقم ${document.querySelector("#studentID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`
             );
-            fetchProducts();
-            document.querySelector("#productID").value = "";
-            document.querySelector("#productTitle").value = "";
-            document.querySelector("#productPrice").value = "";
-            document.querySelector("#productAvail").checked = false;
-            document.querySelector("#productImg").value = "";
+            fetchStudents()
+            document.querySelector("#studentID").value = "";
+            document.querySelector("#studentName").value = "";
+            parts.forEach(part => {
+                document.querySelector(`#checkboxPart-${part}`).checked = false;
+            });
         })
         .catch((error) => {
             alert(
@@ -274,7 +269,7 @@ document.querySelector("#updstudent").addEventListener("click", () => {
 
 
 document.querySelector("#delstudent").addEventListener("click", () => {
-    fetch(`/product/${document.querySelector("#productID").value}`, {
+    fetch(`/product/${document.querySelector("#studentID").value}`, {
             headers: {
                 Method: "DELETE",
                 "Content-Type": "application/json",
@@ -288,7 +283,7 @@ document.querySelector("#delstudent").addEventListener("click", () => {
         .then((responseJson) => {
             if (responseJson.statCode == 404) {
                 alert(
-                    "الرقم التعريفي للمنتج المراد حذفه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-info"
+                    "الرقم التعريفي للطالب المراد حذفه غير موجود\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 404-info"
                 ) | $("#studentModal").modal("show");
                 return;
             }
@@ -311,13 +306,13 @@ document.querySelector("#delstudent").addEventListener("click", () => {
                 return;
             }
 
-            alert(`تم حذف المنتج رقم ${document.querySelector("#productID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`);
-            fetchProducts();
-            document.querySelector("#productID").value = "";
-            document.querySelector("#productTitle").value = "";
-            document.querySelector("#productPrice").value = "";
-            document.querySelector("#productAvail").checked = false;
-            document.querySelector("#productImg").value = "";
+            alert(`تم حذف معلومات الطالب رقم ${document.querySelector("#studentID").value} بنجاح، إنتظر قليلا وستظهر التحديثات`);
+            fetchStudents()
+            document.querySelector("#studentID").value = "";
+            document.querySelector("#studentName").value = "";
+            parts.forEach(part => {
+                document.querySelector(`#checkboxPart-${part}`).checked = false;
+            });
         });
 });
 
