@@ -62,7 +62,7 @@ class StudentsTable:
 
 
     def insert(self, id, name, partsTotal):
-        if (id == "" or name == "" or partsTotal == ""):
+        if (id == "" or name == ""):
             raise Exception("One of the entries is empty")
         self.cur.execute(f"""
 
@@ -86,30 +86,19 @@ class StudentsTable:
         self.cur.execute(f"""
 
                 UPDATE students 
-                SET title = '{name}' 
+                SET name = '{name}' 
                 WHERE id = '{id}'
                         
                         """)
         self.cur.execute(f"""
 
                 UPDATE students 
-                SET price = '{partsTotal}' 
+                SET partsTotal = '{partsTotal}' 
                 WHERE id = '{id}'
 
                         """)
         self.conn.commit()
-    
-
-    def updateImage(self, id, img):
-        print("yes it does run")
-        self.cur.execute(f"""
-
-                UPDATE products 
-                SET img = '{img}' 
-                WHERE id = '{id}'
-
-                        """)
-        self.conn.commit()
+        
 
     def delete(self, id):
         if (id == None):
