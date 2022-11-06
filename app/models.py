@@ -62,10 +62,7 @@ class StudentsTable:
 
 
     def insert(self, id, name, totalParts):
-        print(id)
-        print(name)
-        print(totalParts)
-        if (id == "" or name == "" or totalParts):
+        if (id == "" or name == "" or totalParts == ""):
             raise Exception("One of the entries is empty")
         self.cur.execute(f"""
 
