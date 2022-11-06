@@ -92,6 +92,7 @@ function fetchStudents() {
             let studentInfo = responseJson;
             let tbody = document.querySelector("tbody");
             let numsOfStudents = Object.keys(studentInfo);
+            tbody.innerHTML = '';
             numsOfStudents.forEach(numOfStudent => {
 
                 tbody.innerHTML +=
