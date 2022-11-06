@@ -102,10 +102,10 @@ function fetchStudents() {
                     <td>${studentInfo[numOfStudent].name}</td>
                     <td>${جزء(studentInfo[numOfStudent].partsTotal.length)}</td>
                     <td>
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit', ${encodeURIComponent(JSON.stringify(studentInfo))})"> 
+                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit', ${(JSON.stringify(studentInfo))})"> 
                             <i class="icon fas fa-edit"></i> 
                         </div>
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete', ${encodeURIComponent(JSON.stringify(studentInfo))})"> 
+                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete', ${(JSON.stringify(studentInfo))})"> 
                             <i class="icon fas fa-trash-alt"></i> 
                         </div> 
                     </td>                      
@@ -321,7 +321,7 @@ document.querySelector("#delstudent").addEventListener("click", () => {
 
 
 const deleteOrEditstudent = (id, opration, studentInfo) => {
-    studentInfo = JSON.parse(decodeURIComponent(studentInfo));
+    studentInfo = JSON.parse((studentInfo));
     (parts).forEach(part => {
         document.querySelector(`#checkboxPart-${part}`).checked = false;
     });
