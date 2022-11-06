@@ -357,9 +357,11 @@ const deleteOrEditstudent = (id, opration) => {
         });
     } else if (opration == "delete") {
 
-        (studentInfo[id].partsTotal).forEach(part => {
-            document.querySelector(`#checkboxPart-${part}`).checked = true;
-        });
+        if (studentInfo[id].partsTotal) {
+            (studentInfo[id].partsTotal).forEach(part => {
+                document.querySelector(`#checkboxPart-${part}`).checked = true;
+            });
+        } else {}
 
         // show btn
         document.querySelector("#addstudent").style.display = "none";
