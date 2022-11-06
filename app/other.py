@@ -20,8 +20,7 @@ def convertListToString(list):
         else:
             listStr+=f"{elm} "
     print("listStr: ",listStr)
-    raise Exception(f"list: {list}\n listStr:{listStr}")
-    return listStr
+    return list
 #######################
 ###### Other END ######
 #######################
