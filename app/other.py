@@ -10,6 +10,7 @@
 ###### Other ######
 ###################
 def convertListToString(list):
+    print("list: ",list)
     listStr = ""
     for elm in list:
 
@@ -18,7 +19,7 @@ def convertListToString(list):
 
         else:
             listStr+=f"{elm} "
-        
+    print("listStr: ",listStr)
     return listStr
 #######################
 ###### Other END ######
