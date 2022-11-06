@@ -98,7 +98,7 @@ def student(idIn=None):
             data = request.headers
             id = unquote(data['id'])
             name = unquote(data['name'])
-            partsTotal = convertListToString(unquote(data['partsTotal']))
+            partsTotal = unquote(data['partsTotal'])
 
             try:
                 result = studentObj.search(id)
@@ -128,7 +128,7 @@ def student(idIn=None):
 
             data = request.headers
             name = unquote(data['name'])
-            partsTotal = convertListToString(unquote(data['partsTotal']))
+            partsTotal = unquote(data['partsTotal'])
 
             try:
                 oldPrudRecord = studentObj.search(idIn)
@@ -195,7 +195,7 @@ def students():
     j = 0
     for i in result:
         dictOfResult[i[0]] = {'id': i[0], 'name': i[1],
-                              'partsTotal': i[2]}
+                              'partsTotal': i[2].split(",")}
 
     newIndex = sorted(dictOfResult, key=lambda d: d)
     dictOfResult = {k: dictOfResult[k] for k in newIndex}
