@@ -45,7 +45,7 @@ const changeInputForRev = (numOfStudent) => {
 
 
 /*show or hide revising and memorizing*/
-const showOrHideRevMemo = (numOfStudent) => {
+const showOrHideRevMemo = (numOfStudent, studentInfo) => {
     if (document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "1" || document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "2") {
 
         document.querySelector(`#revisingForm-${numOfStudent}`).style.display = "block";
@@ -105,7 +105,7 @@ function fetchStudents() {
                     <div id="attendenceForm" class="form-row">
                         <div class="form-group">
                             <label for="Attendence">الحضور</label>
-                            <select onclick="showOrHideRevMemo(${numOfStudent})" id="attendenceSelect-${numOfStudent}" class="form-select form-control " aria-label="Default select example ">
+                            <select onclick="showOrHideRevMemo(${numOfStudent}, ${studentInfo})" id="attendenceSelect-${numOfStudent}" class="form-select form-control " aria-label="Default select example ">
                             <option value="0" disabled selected>اختر حالة حضور الطالب</option>
                             <option value="1">حاضر</option>
                             <option value="2">متأخر</option>
@@ -155,7 +155,7 @@ function fetchStudents() {
                 }
                 i++;
                 changeInputForRev(numOfStudent);
-                showOrHideRevMemo(numOfStudent)
+                showOrHideRevMemo(numOfStudent, studentInfo)
 
             });
 
