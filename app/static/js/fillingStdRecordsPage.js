@@ -62,10 +62,38 @@ const showOrHideRevMemo = (numOfStudent) => {
     }
 }
 
-let numsOfStudents = Object.keys(studentInfo);
-numsOfStudents.forEach(numOfStudent => {
-    formsContainer.innerHTML +=
-        `
+
+function fetchStudents() {
+    fetch("/students", {
+            headers: {
+                Method: "GET",
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            method: "GET"
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((responseJson) => {
+            console.log(responseJson);
+            if (responseJson.statCode == 204) {
+                studentForms.innerHTML = "حدث وانتظر قليلا إذا كنت قد أضفت";
+                console.log(204)
+                return;
+            }
+            if (responseJson.statCode == 429) {
+                alert(
+                    "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
+                );
+                return;
+            }
+
+            let studentInfo = responseJson;
+            let numsOfStudents = Object.keys(studentInfo);
+            numsOfStudents.forEach(numOfStudent => {
+                formsContainer.innerHTML +=
+                    `
     <div style="width: 100%;  display: flex;  justify-content: center;">
         <div class="studentForms card px-1 py-4" style="border: black 0.5px solid; ">
             <div class="card-body">
@@ -118,14 +146,25 @@ numsOfStudents.forEach(numOfStudent => {
     </div>
         `;
 
-    if (numOfStudent == numsOfStudents.length - 1) {
-        formsContainer.innerHTML += `
+                if (numOfStudent == numsOfStudents.length - 1) {
+                    formsContainer.innerHTML += `
         <div class="btnContainer">
             <button style="background-color: #14521c;" class="btn btn-success btn-block confirm-button ">رفـــــــع</button>
         </div>`;
-    }
+                }
 
-    changeInputForRev(numOfStudent);
-    showOrHideRevMemo(numOfStudent)
+                changeInputForRev(numOfStudent);
+                showOrHideRevMemo(numOfStudent)
 
-});
+            });
+
+
+        })
+        .catch((error) => {
+            alert(
+                `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 514\n err-fetch-info: students\n التاريخ: ${formatTheDate(
+                    new Date(), 1
+                )}`
+            );
+        });
+}
