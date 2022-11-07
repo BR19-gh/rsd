@@ -62,6 +62,7 @@ const showOrHideRevMemo = (numOfStudent) => {
     }
 }
 
+fetchStudents();
 
 function fetchStudents() {
     fetch("/students", {
