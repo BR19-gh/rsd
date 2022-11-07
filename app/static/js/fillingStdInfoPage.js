@@ -334,7 +334,7 @@ const deleteOrEditstudent = (id, opration) => {
     });
 
     if (opration == "edit") {
-
+        print(studentInfo[id].partsTotal == true)
         if (studentInfo[id].partsTotal == true) {
             (studentInfo[id].partsTotal).forEach(part => {
                 document.querySelector(`#checkboxPart-${part}`).checked = true;
