@@ -89,7 +89,7 @@ function fetchStudents() {
                 );
                 return;
             }
-
+            let i = 0;
             let studentInfo = responseJson;
             let numsOfStudents = Object.keys(studentInfo);
             numsOfStudents.forEach(numOfStudent => {
@@ -147,13 +147,13 @@ function fetchStudents() {
     </div>
         `;
 
-                if (numOfStudent == numsOfStudents.length) {
+                if (i == numsOfStudents.length - 1) {
                     formsContainer.innerHTML += `
         <div class="btnContainer">
             <button style="background-color: #14521c;" class="btn btn-success btn-block confirm-button ">رفـــــــع</button>
         </div>`;
                 }
-
+                i++;
                 changeInputForRev(numOfStudent);
                 showOrHideRevMemo(numOfStudent)
 
