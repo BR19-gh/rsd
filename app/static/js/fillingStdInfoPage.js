@@ -334,13 +334,12 @@ const deleteOrEditstudent = (id, opration) => {
     });
 
     if (opration == "edit") {
-        console.log(studentInfo[id].partsTotal == true)
-        console.log(studentInfo[id].partsTotal)
-        if (studentInfo[id].partsTotal == true) {
+
+        if (studentInfo[id].partsTotal != 0) {
             (studentInfo[id].partsTotal).forEach(part => {
                 document.querySelector(`#checkboxPart-${part}`).checked = true;
             });
-        } else {}
+        }
 
         // show btn
         document.querySelector("#addstudent").style.display = "none";
