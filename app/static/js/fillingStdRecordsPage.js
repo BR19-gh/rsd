@@ -28,7 +28,11 @@
 //     },
 // }
 
+let listOfStudents;
 
+const setListOfStudents = (responseJson) => {
+    listOfStudents = responseJson;
+}
 
 /*change Input status For Revising*/
 const changeInputForRev = (numOfStudent) => {
@@ -45,12 +49,12 @@ const changeInputForRev = (numOfStudent) => {
 
 
 /*show or hide revising and memorizing*/
-const showOrHideRevMemo = (numOfStudent, studentInfo) => {
+const showOrHideRevMemo = (numOfStudent) => {
     if (document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "1" || document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "2") {
 
         document.querySelector(`#revisingForm-${numOfStudent}`).style.display = "block";
 
-        if (studentInfo[numOfStudent].partsTotal.length == 30) {
+        if (listOfStudents[numOfStudent].partsTotal.length == 30) {
             document.querySelector(`#memorizingForm-${numOfStudent}`).style.display = "none";
         } else {
             document.querySelector(`#memorizingForm-${numOfStudent}`).style.display = "block";
@@ -91,6 +95,7 @@ function fetchStudents() {
             }
             let i = 0;
             let studentInfo = responseJson;
+            setListOfStudents(responseJson)
             let numsOfStudents = Object.keys(studentInfo);
             numsOfStudents.forEach(numOfStudent => {
                 formsContainer.innerHTML +=
@@ -105,7 +110,7 @@ function fetchStudents() {
                     <div id="attendenceForm" class="form-row">
                         <div class="form-group">
                             <label for="Attendence">الحضور</label>
-                            <select onclick="showOrHideRevMemo(${numOfStudent}, ${studentInfo})" id="attendenceSelect-${numOfStudent}" class="form-select form-control " aria-label="Default select example ">
+                            <select onclick="showOrHideRevMemo(${numOfStudent})" id="attendenceSelect-${numOfStudent}" class="form-select form-control " aria-label="Default select example ">
                             <option value="0" disabled selected>اختر حالة حضور الطالب</option>
                             <option value="1">حاضر</option>
                             <option value="2">متأخر</option>
@@ -155,7 +160,7 @@ function fetchStudents() {
                 }
                 i++;
                 changeInputForRev(numOfStudent);
-                showOrHideRevMemo(numOfStudent, studentInfo)
+                showOrHideRevMemo(numOfStudent)
 
             });
 
