@@ -184,3 +184,8 @@ body {
 input {
     text-align: center;
 }
+
+div#studentForms {
+    height: 625px;
+    margin-top: 20px;
+}
