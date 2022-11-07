@@ -147,7 +147,7 @@ function fetchStudents() {
     </div>
         `;
 
-                if (numOfStudent == numsOfStudents.length - 1) {
+                if (numOfStudent == numsOfStudents.length) {
                     formsContainer.innerHTML += `
         <div class="btnContainer">
             <button style="background-color: #14521c;" class="btn btn-success btn-block confirm-button ">رفـــــــع</button>
