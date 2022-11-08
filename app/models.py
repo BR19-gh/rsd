@@ -164,8 +164,9 @@ class RecordsTable:
                             (
                                 stdId,
                                 attStat,
-                                amount,
-                                exp
+                                memoStat,
+                                revStat,
+                                recordDate
                             )
                 VALUES
                             {( 

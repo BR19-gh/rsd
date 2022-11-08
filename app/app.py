@@ -204,6 +204,71 @@ def students():
         return jsonify({"msg": f"No Content 204: There is no content to get.", "statCode": 204})
     else:
         return jsonify(dictOfResult)
+
+
+
+
+
+@app.route("/record", methods=['POST'])
+@app.route("/record/<idIn>", methods=['PUT', 'DELETE', 'GET'])
+@limiter.limit('1 per 10seconds', per_method=True, methods=['PUT', 'DELETE'])
+def record(idIn=None):
+    try:
+        print('The ip address: ', get_remote_address())
+        recordObj = RecordsTable()
+
+        if request.method == 'POST':
+
+            data = request.headers
+            id = unquote(data['stdId'])
+            attStat = unquote(data['attStat'])
+            memoStat = unquote(data['memoStat'])
+            revStat = unquote(data['revStat'])
+            recordDate = unquote(data['recordDate'])
+
+
+            try:
+                recordObj.insert(id, attStat, memoStat, revStat, recordDate)
+
+            except Exception as err:
+                print(err, "line: 139")
+
+        elif request.method == 'PUT':
+
+            data = request.headers
+            memoStat = unquote(data['memoStat'])
+            revStat = unquote(data['revStat'])
+            recordDate = unquote(data['recordDate'])
+
+            try:
+                recordObj.update(idIn, attStat, memoStat, revStat, recordDate)
+
+            except Exception as err:
+                print(err, "line: 162")
+
+        elif request.method == 'GET':
+
+            try:
+                result = recordObj.search(idIn)
+
+                if result == None:
+                    return jsonify({"msg": f"Success 202: the record of idIn {idIn} doesn't exist, so it can be added", "statCode": 202})
+                else:
+                    return jsonify({"msg": f"Status Code 403: the record of idIn {idIn} exists, {recordObj.search(idIn)[0::2]}", "statCode": 403})
+            except Exception as err:
+                print(err, "line: 178")
+                if (isinstance(idIn, int) == False):
+                    return jsonify({"msg": f"Bad Request 400:  record of idIn is not integer, or it contains illegal form of characters", "statCode": 400})
+
+        elif request.method == 'DELETE':
+
+            try:
+                recordObj.delete(idIn)
+            except Exception as err:
+                print(err, "line: 190")
+                
+    except Exception as err:
+        print(err, "line: 203")
 ##############################
 ###### Backend Endpoints END ######
 ##############################

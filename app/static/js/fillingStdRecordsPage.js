@@ -112,10 +112,10 @@ function fetchStudents() {
                             <label for="Attendence">الحضور</label>
                             <select onclick="showOrHideRevMemo(${numOfStudent})" id="attendenceSelect-${numOfStudent}" class="form-select form-control " aria-label="Default select example ">
                             <option value="0" disabled selected>اختر حالة حضور الطالب</option>
-                            <option value="1">حاضر</option>
-                            <option value="2">متأخر</option>
-                            <option value="3">غائب بعذر</option>
-                            <option value="4">غائب بدون بعذر</option>
+                            <option value="حاضر">حاضر</option>
+                            <option value="متأخر">متأخر</option>
+                            <option value="غائب بعذر">غائب بعذر</option>
+                            <option value="غائب بدون عذر">غائب بدون عذر</option>
                         </select>
                         </div>
                     </div>
@@ -123,12 +123,12 @@ function fetchStudents() {
                     <div id="memorizingForm-${numOfStudent}" class="form-row mt-3 ">
                         <div class="form-group ">
                             <label for="Memorizing ">الحفظ</label>
-                            <select class="form-select form-control " aria-label="Default select example ">
+                            <select id="memorizingSelect-${numOfStudent}" class="form-select form-control" aria-label="Default select example ">
                             <option value="0" disabled selected>اختر حالة حفظ الطالب</option>
-                            <option value="1">لم يحفظ</option>
-                            <option value="2">نصف وجه</option>
-                            <option value="3">وجه واحد</option>
-                            <option value="4">وجهان</option>
+                            <option value="لم يحفظ">لم يحفظ</option>
+                            <option value="نصف وجه">نصف وجه</option>
+                            <option value="وجه واحد">وجه واحد</option>
+                            <option value="وجهان">وجهان</option>
                         </select>
                         </div>
                     </div>
@@ -155,7 +155,7 @@ function fetchStudents() {
                 if (i == numsOfStudents.length - 1) {
                     formsContainer.innerHTML += `
         <div class="btnContainer">
-            <button style="background-color: #14521c;" class="btn btn-success btn-block confirm-button ">رفـــــــع</button>
+            <button id="submitRecordsBtn" style="background-color: #14521c;" class="btn btn-success btn-block confirm-button ">رفـــــــع</button>
         </div>`;
                 }
                 i++;
@@ -173,4 +173,131 @@ function fetchStudents() {
                 )}`
             );
         });
+}
+
+document.querySelector("#submitRecordsBtn").addEventListener("click", () => {
+    let valueOfinputForRev;
+    let students = Object.keys(listOfStudents);
+    studentsIds.forEach(studentId => {
+
+        if (document.querySelector(`#attendenceSelect-${studentId}`).value == 0) {
+            alert("يجب تعبئة جميع سجلات الطلاب أولا");
+            return;
+
+        }
+        if (document.querySelector(`#memorizingSelect-${studentId}`).value == 0) {
+
+            if (listOfStudents[studentId].partsTotal.length < 30) {
+                alert("يجب تعبئة جميع سجلات الطلاب أولا");
+                return;
+            }
+
+        }
+        if (document.querySelector(`#checkboxForRev-${studentId}`).checked) {
+
+            if (document.querySelector(`#inputForRev-${studentId}`) == "") {
+                alert("يجب تعبئة جميع سجلات الطلاب أولا");
+                return;
+            }
+            valueOfinputForRev = document.querySelector(`#inputForRev-${studentId}`);
+        } else {
+            valueOfinputForRev = "لم يراجع"
+        }
+
+        fetch("/student", {
+                headers: {
+                    stdId: encodeURIComponent(studentId),
+                    attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
+                    memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
+                    revStat: encodeURIComponent(valueOfinputForRev),
+                    recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
+                },
+                method: "POST",
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                // if (responseJson.statCode == 403) {
+                //     alert(
+                //         "الرقم التعريفي للطالب المراد إضافته موجود مسبقا\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 403-info"
+                //     ) | $("#studentModal").modal("show");
+                //     return;
+                // }
+                // if (responseJson.statCode == 400) {
+                //     alert(
+                //         "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-info"
+                //     ) | $("#studentModal").modal("show");
+                //     return;
+                // }
+                // if (responseJson.statCode == 429) {
+                //     alert(
+                //         "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
+                //     ) | $("#studentModal").modal("show");
+                //     return;
+                // }
+                if (responseJson.statCode) {
+                    alert(
+                        "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 530-info"
+                    );
+                    return;
+                }
+
+                alert(
+                    `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات`
+                );
+                window.reload
+            })
+            .catch((error) => {
+                alert(
+                    `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 516\n err-fetch-info: student\n التاريخ: ${formatTheDate(
+                    new Date(), 1
+                )}`
+                );
+            });
+
+    });
+
+
+});
+
+
+
+function formatTheDate(date, typeOfFormat) {
+    let hours12 = date.getHours();
+    let hours24 = hours12;
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    const ampm = hours12 >= 12 ? "م" : "ص";
+    hours12 = hours12 % 12;
+    hours12 = hours12 || 12;
+    const year = date.getFullYear();
+    let month = date.getMonth();
+    month = Number(month) + 1 < 10 ? "0" + (Number(month) + 1) : Number(month) + 1;
+    let day = date.getDate();
+    hours12 = hours12 < 10 ? "0" + hours12 : hours12;
+    hours24 = hours24 < 10 ? "0" + hours24 : hours24;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    day = day < 10 ? "0" + day : day;
+    if (isNaN(year) == true) {
+        return null;
+    }
+    if (typeOfFormat == 1) {
+        const strTime =
+            year + "/" + month + "/" + day + ", " + hours12 + ":" + minutes + ampm;
+        return strTime;
+    } else if (typeOfFormat == 3) {
+        const strTime =
+            year + "-" + month + "-" + day + "T" + hours24 + ":" + minutes + ":" + seconds;
+        return strTime;
+    } else if (typeOfFormat == "id") {
+        const strTime =
+            `${month}${day}${hours24}${minutes}${seconds}`;
+        return strTime;
+    } else if (typeOfFormat == "basic") {
+        const strTime =
+            year + "-" + month + "-" + day;
+        return strTime;
+    }
 }
