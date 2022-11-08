@@ -155,7 +155,7 @@ function fetchStudents() {
                 if (i == numsOfStudents.length - 1) {
                     formsContainer.innerHTML += `
         <div class="btnContainer">
-            <button id="submitRecordsBtn" style="background-color: #14521c;" class="btn btn-success btn-block confirm-button ">رفـــــــع</button>
+            <button id="submitRecordsBtn" onclick="submitRecords()" style="background-color: #14521c;" class="btn btn-success btn-block confirm-button ">رفـــــــع</button>
         </div>`;
                 }
                 i++;
@@ -175,7 +175,7 @@ function fetchStudents() {
         });
 }
 
-document.querySelector("#submitRecordsBtn").addEventListener("click", () => {
+const submitRecords = () => {
     let valueOfinputForRev;
     let students = Object.keys(listOfStudents);
     studentsIds.forEach(studentId => {
@@ -259,7 +259,7 @@ document.querySelector("#submitRecordsBtn").addEventListener("click", () => {
     });
 
 
-});
+}
 
 
 
