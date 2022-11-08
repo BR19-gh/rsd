@@ -177,7 +177,7 @@ function fetchStudents() {
 
 const submitRecords = () => {
     let valueOfinputForRev;
-    let students = Object.keys(listOfStudents);
+    let studentsIds = Object.keys(listOfStudents);
     studentsIds.forEach(studentId => {
 
         if (document.querySelector(`#attendenceSelect-${studentId}`).value == 0) {
