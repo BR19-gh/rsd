@@ -221,8 +221,8 @@ const submitRecords = () => {
                 fetch("/record", {
                         headers: {
                             stdId: encodeURIComponent(studentId),
-                            attStat: encodeURIComponent(finalReturn[studentId].attStat),
                             memoStat: encodeURIComponent(finalReturn[studentId].memoStat),
+                            attStat: encodeURIComponent(finalReturn[studentId].attStat),
                             revStat: encodeURIComponent(finalReturn[studentId].revStat),
                             recordDate: encodeURIComponent(finalReturn[studentId].recordDate),
                         },
