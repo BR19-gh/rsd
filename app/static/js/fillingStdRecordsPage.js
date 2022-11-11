@@ -214,7 +214,7 @@ const submitRecords = () => {
         })
         console.log(finalReturn)
         if (finalReturn.length == Object.keys(listOfStudents).length) {
-            (Object.keys(listOfStudents)).every(studentId => {
+            (Object.keys(listOfStudents)).forEach(studentId => {
                 fetch("/record", {
                         headers: {
                             stdId: encodeURIComponent(studentId),
@@ -269,7 +269,7 @@ const submitRecords = () => {
             });
         } else {
             alert("يجب تعبئة جميع سجلات الطلاب أولا");
-            return getOut;
+            return;
         }
 
     });
