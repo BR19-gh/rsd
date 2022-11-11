@@ -50,8 +50,8 @@ const changeInputForRev = (numOfStudent) => {
 
 /*show or hide revising and memorizing*/
 const showOrHideRevMemo = (numOfStudent) => {
-    console.log("hhhhhhhhhh")
-    if (document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "1" || document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "2") {
+
+    if (document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "حاضر" || document.querySelector(`#attendenceSelect-${numOfStudent}`).value == "متأخر") {
 
         document.querySelector(`#revisingForm-${numOfStudent}`).style.display = "block";
 
