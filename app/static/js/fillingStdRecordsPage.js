@@ -256,7 +256,7 @@ const submitRecords = () => {
                 )}`
                 );
             });
-
+        return;
     });
 
 
