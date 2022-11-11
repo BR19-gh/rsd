@@ -257,7 +257,7 @@ const submitRecords = () => {
                         alert(
                             `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات`
                         );
-                        window.reload
+                        location.reload();
                     })
                     .catch((error) => {
                         alert(
@@ -267,10 +267,11 @@ const submitRecords = () => {
                         );
                     });
             });
-        } else {
-            alert("يجب تعبئة جميع سجلات الطلاب أولا, 4");
-            return;
         }
+        //  else {
+        //     alert("يجب تعبئة جميع سجلات الطلاب أولا, 4");
+        //     return;
+        // }
 
     });
 
