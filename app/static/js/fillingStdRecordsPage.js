@@ -175,8 +175,9 @@ function fetchStudents() {
             );
         });
 }
-let finalReturn = [];
+
 const submitRecords = () => {
+    let finalReturn = [];
     let valueOfinputForRev;
     let studentsIds = Object.keys(listOfStudents);
     studentsIds.every(studentId => {
