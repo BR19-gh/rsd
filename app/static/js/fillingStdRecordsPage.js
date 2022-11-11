@@ -214,7 +214,7 @@ const submitRecords = () => {
             revStat: encodeURIComponent(valueOfinputForRev),
             recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
         })
-        console.log(finalReturn)
+        console.log(finalReturn, finalReturn[studentId].attStat)
         if (finalReturn.length == Object.keys(listOfStudents).length) {
             (Object.keys(listOfStudents)).forEach(studentId => {
                 fetch("/record", {
