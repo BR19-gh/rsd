@@ -175,7 +175,7 @@ function fetchStudents() {
             );
         });
 }
-let finalReturn;
+let finalReturn = [];
 const submitRecords = () => {
     let valueOfinputForRev;
     let studentsIds = Object.keys(listOfStudents);
@@ -205,14 +205,13 @@ const submitRecords = () => {
         } else {
             valueOfinputForRev = "لم يراجع"
         }
-        obj = {
+        finalReturn.push({
             stdId: encodeURIComponent(studentId),
             attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
             memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
             revStat: encodeURIComponent(valueOfinputForRev),
             recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
-        }
-        finalReturn.push(obj)
+        })
         console.log(finalReturn)
             /* fetch("/record", {
                      headers: {
