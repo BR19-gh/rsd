@@ -206,7 +206,7 @@ const submitRecords = () => {
             valueOfinputForRev = "لم يراجع"
         }
 
-        fetch("/student", {
+        fetch("/record", {
                 headers: {
                     stdId: encodeURIComponent(studentId),
                     attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
