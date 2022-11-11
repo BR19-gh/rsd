@@ -205,7 +205,13 @@ const submitRecords = () => {
         } else {
             valueOfinputForRev = "لم يراجع"
         }
-
+        console.log({
+            stdId: encodeURIComponent(studentId),
+            attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
+            memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
+            revStat: encodeURIComponent(valueOfinputForRev),
+            recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
+        })
         fetch("/record", {
                 headers: {
                     stdId: encodeURIComponent(studentId),
