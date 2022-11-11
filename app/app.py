@@ -213,6 +213,7 @@ def students():
 @app.route("/record/<idIn>", methods=['PUT', 'DELETE', 'GET'])
 @limiter.limit('1 per 10seconds', per_method=True, methods=['PUT', 'DELETE'])
 def record(idIn=None):
+    
     try:
         print('The ip address: ', get_remote_address())
         recordObj = RecordsTable()
@@ -225,6 +226,15 @@ def record(idIn=None):
             memoStat = unquote(data['memoStat'])
             revStat = unquote(data['revStat'])
             recordDate = unquote(data['recordDate'])
+
+            print(
+                {
+            id,
+            attStat,
+            memoStat,
+            revStat,
+            recordDate}
+            )
 
 
             try:
