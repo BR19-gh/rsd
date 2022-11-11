@@ -189,7 +189,7 @@ const submitRecords = () => {
             return getOut;
 
         }
-        if (document.querySelector(`#memorizingSelect-${studentId}`).value == 0) {
+        if (document.querySelector(`#memorizingSelect-${studentId}`).value == 0 && document.querySelector(`#attendenceSelect-${studentId}`).value != "غائب بعذر" && document.querySelector(`#attendenceSelect-${studentId}`).value != "غائب بدون عذر") {
 
             if (listOfStudents[studentId].partsTotal.length < 30) {
                 alert("يجب تعبئة جميع سجلات الطلاب أولا, 2");
