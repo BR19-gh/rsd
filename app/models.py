@@ -126,9 +126,9 @@ class RecordsTable:
                 CREATE TABLE IF NOT EXISTS records
                     (
                         stdId      INTEGER NOT NULL,
-                        attStat    INTEGER NOT NULL,
-                        memoStat   INTEGER,
-                        revStat    INTEGER,
+                        attStat    TEXT NOT NULL,
+                        memoStat   TEXT,
+                        revStat    TEXT,
                         recordDate TEXT NOT NULL
                     ) 
             
