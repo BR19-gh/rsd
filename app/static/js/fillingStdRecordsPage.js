@@ -205,20 +205,14 @@ const submitRecords = () => {
         } else {
             valueOfinputForRev = "لم يراجع"
         }
-        console.log({
+        obj = {
             stdId: encodeURIComponent(studentId),
             attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
             memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
             revStat: encodeURIComponent(valueOfinputForRev),
             recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
-        })
-        finalReturn.push({
-            stdId: encodeURIComponent(studentId),
-            attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
-            memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
-            revStat: encodeURIComponent(valueOfinputForRev),
-            recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
-        })
+        }
+        finalReturn.push(obj)
         console.log(finalReturn)
             /* fetch("/record", {
                      headers: {
