@@ -183,14 +183,14 @@ const submitRecords = () => {
         let getOut = false;
 
         if (document.querySelector(`#attendenceSelect-${studentId}`).value == 0) {
-            alert("يجب تعبئة جميع سجلات الطلاب أولا");
+            alert("يجب تعبئة جميع سجلات الطلاب أولا, 1");
             return getOut;
 
         }
         if (document.querySelector(`#memorizingSelect-${studentId}`).value == 0) {
 
             if (listOfStudents[studentId].partsTotal.length < 30) {
-                alert("يجب تعبئة جميع سجلات الطلاب أولا");
+                alert("يجب تعبئة جميع سجلات الطلاب أولا, 2");
                 return getOut;
             }
 
@@ -198,7 +198,7 @@ const submitRecords = () => {
         if (document.querySelector(`#checkboxForRev-${studentId}`).checked) {
 
             if (document.querySelector(`#inputForRev-${studentId}`) == "") {
-                alert("يجب تعبئة جميع سجلات الطلاب أولا");
+                alert("يجب تعبئة جميع سجلات الطلاب أولا, 3");
                 return getOut;
             }
             valueOfinputForRev = document.querySelector(`#inputForRev-${studentId}`);
@@ -268,7 +268,7 @@ const submitRecords = () => {
                     });
             });
         } else {
-            alert("يجب تعبئة جميع سجلات الطلاب أولا");
+            alert("يجب تعبئة جميع سجلات الطلاب أولا, 4");
             return;
         }
 
