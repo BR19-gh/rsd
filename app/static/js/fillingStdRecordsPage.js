@@ -180,7 +180,7 @@ const submitRecords = () => {
     let finalReturn = [];
     let valueOfinputForRev;
     let studentsIds = Object.keys(listOfStudents);
-    studentsIds.every(studentId => {
+    studentsIds.forEach(studentId => {
         console.log(studentId)
         let getOut = false;
 
