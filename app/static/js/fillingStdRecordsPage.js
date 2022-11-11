@@ -181,6 +181,7 @@ const submitRecords = () => {
     let valueOfinputForRev;
     let studentsIds = Object.keys(listOfStudents);
     studentsIds.every(studentId => {
+        console.log(studentId)
         let getOut = false;
 
         if (document.querySelector(`#attendenceSelect-${studentId}`).value == 0) {
@@ -202,7 +203,7 @@ const submitRecords = () => {
                 alert("يجب تعبئة جميع سجلات الطلاب أولا, 3");
                 return getOut;
             }
-            valueOfinputForRev = document.querySelector(`#inputForRev-${studentId}`);
+            valueOfinputForRev = document.querySelector(`#inputForRev-${studentId}`).value;
         } else {
             valueOfinputForRev = "لم يراجع"
         }
