@@ -175,7 +175,7 @@ function fetchStudents() {
             );
         });
 }
-
+let finalReturn;
 const submitRecords = () => {
     let valueOfinputForRev;
     let studentsIds = Object.keys(listOfStudents);
@@ -212,57 +212,65 @@ const submitRecords = () => {
             revStat: encodeURIComponent(valueOfinputForRev),
             recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
         })
-        fetch("/record", {
-                headers: {
-                    stdId: encodeURIComponent(studentId),
-                    attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
-                    memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
-                    revStat: encodeURIComponent(valueOfinputForRev),
-                    recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
-                },
-                method: "POST",
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((responseJson) => {
-                // if (responseJson.statCode == 403) {
-                //     alert(
-                //         "الرقم التعريفي للطالب المراد إضافته موجود مسبقا\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 403-info"
-                //     ) | $("#studentModal").modal("show");
-                //     return;
-                // }
-                // if (responseJson.statCode == 400) {
-                //     alert(
-                //         "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-info"
-                //     ) | $("#studentModal").modal("show");
-                //     return;
-                // }
-                // if (responseJson.statCode == 429) {
-                //     alert(
-                //         "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
-                //     ) | $("#studentModal").modal("show");
-                //     return;
-                // }
-                if (responseJson.statCode) {
-                    alert(
-                        "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 530-info"
-                    );
-                    return;
-                }
+        finalReturn.push({
+            stdId: encodeURIComponent(studentId),
+            attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
+            memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
+            revStat: encodeURIComponent(valueOfinputForRev),
+            recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
+        })
+        console.log(finalReturn)
+            /* fetch("/record", {
+                     headers: {
+                         stdId: encodeURIComponent(studentId),
+                         attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
+                         memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
+                         revStat: encodeURIComponent(valueOfinputForRev),
+                         recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
+                     },
+                     method: "POST",
+                 })
+                 .then((response) => {
+                     return response.json();
+                 })
+                 .then((responseJson) => {
+                     // if (responseJson.statCode == 403) {
+                     //     alert(
+                     //         "الرقم التعريفي للطالب المراد إضافته موجود مسبقا\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 403-info"
+                     //     ) | $("#studentModal").modal("show");
+                     //     return;
+                     // }
+                     // if (responseJson.statCode == 400) {
+                     //     alert(
+                     //         "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-info"
+                     //     ) | $("#studentModal").modal("show");
+                     //     return;
+                     // }
+                     // if (responseJson.statCode == 429) {
+                     //     alert(
+                     //         "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
+                     //     ) | $("#studentModal").modal("show");
+                     //     return;
+                     // }
+                     if (responseJson.statCode) {
+                         alert(
+                             "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 530-info"
+                         );
+                         return;
+                     }
 
-                alert(
-                    `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات`
-                );
-                window.reload
-            })
-            .catch((error) => {
-                alert(
-                    `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 516\n err-fetch-info: student\n التاريخ: ${formatTheDate(
-                    new Date(), 1
-                )}`
-                );
-            });
+                     alert(
+                         `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات`
+                     );
+                     window.reload
+                 })
+                 .catch((error) => {
+                     alert(
+                         `توجد مشكلة في التواصل مع السيرفر،\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrMsg: ${error}\n ErrCode: 516\n err-fetch-info: student\n التاريخ: ${formatTheDate(
+                         new Date(), 1
+                     )}`
+                     );
+                 }); */
 
     });
 
