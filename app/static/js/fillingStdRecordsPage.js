@@ -179,18 +179,19 @@ function fetchStudents() {
 const submitRecords = () => {
     let valueOfinputForRev;
     let studentsIds = Object.keys(listOfStudents);
-    studentsIds.forEach(studentId => {
+    studentsIds.every(studentId => {
+        let getOut = false;
 
         if (document.querySelector(`#attendenceSelect-${studentId}`).value == 0) {
             alert("يجب تعبئة جميع سجلات الطلاب أولا");
-            return;
+            return getOut;
 
         }
         if (document.querySelector(`#memorizingSelect-${studentId}`).value == 0) {
 
             if (listOfStudents[studentId].partsTotal.length < 30) {
                 alert("يجب تعبئة جميع سجلات الطلاب أولا");
-                return;
+                return getOut;
             }
 
         }
@@ -198,7 +199,7 @@ const submitRecords = () => {
 
             if (document.querySelector(`#inputForRev-${studentId}`) == "") {
                 alert("يجب تعبئة جميع سجلات الطلاب أولا");
-                return;
+                return getOut;
             }
             valueOfinputForRev = document.querySelector(`#inputForRev-${studentId}`);
         } else {
@@ -256,7 +257,7 @@ const submitRecords = () => {
                 )}`
                 );
             });
-        return;
+
     });
 
 
