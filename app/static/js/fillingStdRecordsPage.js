@@ -175,7 +175,7 @@ function fetchStudents() {
             );
         });
 }
-
+let x;
 const submitRecords = () => {
     let finalReturn = [];
     let valueOfinputForRev;
@@ -214,7 +214,8 @@ const submitRecords = () => {
             revStat: encodeURIComponent(valueOfinputForRev),
             recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
         })
-        console.log(finalReturn, finalReturn[studentId].attStat)
+        x = finalReturn;
+        console.log(finalReturn)
         if (finalReturn.length == Object.keys(listOfStudents).length) {
             (Object.keys(listOfStudents)).forEach(studentId => {
                 fetch("/record", {
