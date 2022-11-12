@@ -218,8 +218,16 @@ const submitRecords = () => {
         console.log(finalReturn)
         let i = 0;
         console.log(finalReturn.length == Object.keys(listOfStudents).length)
+
         if (finalReturn.length == Object.keys(listOfStudents).length) {
             (Object.keys(listOfStudents)).forEach(studentId => {
+                console.log({
+                    stdId: (studentId),
+                    attStat: (finalReturn[i].attStat),
+                    memoStat: (finalReturn[i].memoStat),
+                    revStat: (finalReturn[i].revStat),
+                    recordDate: (finalReturn[i].recordDate),
+                })
                 fetch("/record", {
                         headers: {
                             stdId: (studentId),
