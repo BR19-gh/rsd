@@ -208,11 +208,11 @@ const submitRecords = () => {
             valueOfinputForRev = "لم يراجع"
         }
         finalReturn.push({
-            stdId: encodeURIComponent(studentId),
-            attStat: encodeURIComponent(document.querySelector(`#attendenceSelect-${studentId}`).value),
-            memoStat: encodeURIComponent(document.querySelector(`#memorizingSelect-${studentId}`).value),
-            revStat: encodeURIComponent(valueOfinputForRev),
-            recordDate: encodeURIComponent(formatTheDate(new Date(), 'basic')),
+            stdId: (studentId),
+            attStat: (document.querySelector(`#attendenceSelect-${studentId}`).value),
+            memoStat: (document.querySelector(`#memorizingSelect-${studentId}`).value),
+            revStat: (valueOfinputForRev),
+            recordDate: (formatTheDate(new Date(), 'basic')),
         })
         x = finalReturn;
         console.log(finalReturn)
