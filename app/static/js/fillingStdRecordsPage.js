@@ -217,7 +217,7 @@ const submitRecords = () => {
         x = finalReturn;
         console.log(finalReturn)
         let i = 0;
-        (finalReturn.length == Object.keys(listOfStudents).length)
+        console.log(finalReturn.length == Object.keys(listOfStudents).length)
         if (finalReturn.length == Object.keys(listOfStudents).length) {
             (Object.keys(listOfStudents)).forEach(studentId => {
                 fetch("/record", {
