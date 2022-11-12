@@ -221,11 +221,11 @@ const submitRecords = () => {
             (Object.keys(listOfStudents)).forEach(studentId => {
                 fetch("/record", {
                         headers: {
-                            stdId: encodeURIComponent(studentId),
-                            memoStat: encodeURIComponent(finalReturn[i].memoStat),
-                            attStat: encodeURIComponent(finalReturn[i].attStat),
-                            revStat: encodeURIComponent(finalReturn[i].revStat),
-                            recordDate: encodeURIComponent(finalReturn[i].recordDate),
+                            stdId: (studentId),
+                            attStat: (finalReturn[i].attStat),
+                            memoStat: (finalReturn[i].memoStat),
+                            revStat: (finalReturn[i].revStat),
+                            recordDate: (finalReturn[i].recordDate),
                         },
                         method: "POST",
                     })
