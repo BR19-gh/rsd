@@ -227,7 +227,7 @@ const submitRecords = () => {
                     memoStat: (finalReturn[i].memoStat),
                     revStat: (finalReturn[i].revStat),
                     recordDate: (finalReturn[i].recordDate),
-                })
+                }, i)
                 fetch("/record", {
                         headers: {
                             stdId: (studentId),
