@@ -216,15 +216,16 @@ const submitRecords = () => {
         })
         x = finalReturn;
         console.log(finalReturn)
+        let i = 0;
         if (finalReturn.length == Object.keys(listOfStudents).length) {
             (Object.keys(listOfStudents)).forEach(studentId => {
                 fetch("/record", {
                         headers: {
                             stdId: encodeURIComponent(studentId),
-                            memoStat: encodeURIComponent(finalReturn[studentId].memoStat),
-                            attStat: encodeURIComponent(finalReturn[studentId].attStat),
-                            revStat: encodeURIComponent(finalReturn[studentId].revStat),
-                            recordDate: encodeURIComponent(finalReturn[studentId].recordDate),
+                            memoStat: encodeURIComponent(finalReturn[i].memoStat),
+                            attStat: encodeURIComponent(finalReturn[i].attStat),
+                            revStat: encodeURIComponent(finalReturn[i].revStat),
+                            recordDate: encodeURIComponent(finalReturn[i].recordDate),
                         },
                         method: "POST",
                     })
@@ -256,11 +257,14 @@ const submitRecords = () => {
                             );
                             return;
                         }
-
-                        alert(
-                            `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات`
-                        );
-                        location.reload();
+                        i++;
+                        console.log(i)
+                        if (finalReturn.length == i) {
+                            alert(
+                                `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات`
+                            );
+                            location.reload();
+                        }
                     })
                     .catch((error) => {
                         alert(
