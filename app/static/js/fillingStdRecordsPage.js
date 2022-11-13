@@ -84,7 +84,7 @@ function fetchStudents() {
         .then((responseJson) => {
             console.log(responseJson);
             if (responseJson.statCode == 204) {
-                studentForms.innerHTML = "حدث وانتظر قليلا إذا كنت قد أضفت";
+                س
                 console.log(204)
                 formsContainer.innerHTML = `<div style="width: 100%;  display: flex;  justify-content: center;">
                 <div class="studentForms card px-1 py-4" style="border: black 0.5px solid; ">
