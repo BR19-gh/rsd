@@ -230,11 +230,11 @@ const submitRecords = () => {
                 }, i)
                 fetch("/record", {
                         headers: {
-                            stdId: (studentId),
-                            attStat: (finalReturn[i].attStat),
-                            memoStat: (finalReturn[i].memoStat),
-                            revStat: (finalReturn[i].revStat),
-                            recordDate: (finalReturn[i].recordDate),
+                            stdId: encodeURIComponent(studentId),
+                            attStat: encodeURIComponent(finalReturn[i].attStat),
+                            memoStat: encodeURIComponent(finalReturn[i].memoStat),
+                            revStat: encodeURIComponent(finalReturn[i].revStat),
+                            recordDate: encodeURIComponent(finalReturn[i].recordDate),
                         },
                         method: "POST",
                     })
