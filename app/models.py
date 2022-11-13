@@ -158,6 +158,7 @@ class RecordsTable:
     def insert(self, stdId, attStat, memoStat, revStat, recordDate):
         if (stdId == "" or attStat == "" or recordDate == ""):
             raise Exception("One of the entries is empty")
+        print("check 2")
         self.cur.execute(f"""
 
                 INSERT INTO records
