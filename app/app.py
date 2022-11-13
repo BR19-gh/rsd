@@ -238,6 +238,7 @@ def record(idIn=None):
 
 
             try:
+                print("check 1")
                 recordObj.insert(id, attStat, memoStat, revStat, recordDate)
 
             except Exception as err:
