@@ -86,6 +86,18 @@ function fetchStudents() {
             if (responseJson.statCode == 204) {
                 studentForms.innerHTML = "حدث وانتظر قليلا إذا كنت قد أضفت";
                 console.log(204)
+                formsContainer.innerHTML = `<div style="width: 100%;  display: flex;  justify-content: center;">
+                <div class="studentForms card px-1 py-4" style="border: black 0.5px solid; ">
+                    <div class="card-body">
+        
+                        <h6 class="card-title text-center fw-bold mb-3">لا يوجد طلاب مسجلين</h6>
+        
+                        <form>
+                        حدث وانتظر قليلا إذا كنت قد أضفت
+                        </form>
+                    </div>
+                </div>
+            </div>`;
                 return;
             }
             if (responseJson.statCode == 429) {
