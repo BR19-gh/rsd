@@ -260,7 +260,7 @@ const submitRecords = () => {
                         //     ) | $("#studentModal").modal("show");
                         //     return;
                         // }
-                        if (responseJson.statCode) {
+                        if (responseJson.statCode == "500") {
                             alert(
                                 "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 530-info"
                             );

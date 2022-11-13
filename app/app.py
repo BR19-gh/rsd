@@ -240,7 +240,7 @@ def record(idIn=None):
             try:
                 print("check 1")
                 recordObj.insert(id, attStat, memoStat, revStat, recordDate)
-
+                return jsonify({"msg": f"Success 201: record of stdId:{id} and recordDate:{recordDate} is recorded successfully.", "statCode": 201})
             except Exception as err:
                 print(err, "line: 139")
 
@@ -253,7 +253,6 @@ def record(idIn=None):
 
             try:
                 recordObj.update(idIn, attStat, memoStat, revStat, recordDate)
-
             except Exception as err:
                 print(err, "line: 162")
 
