@@ -227,11 +227,11 @@ const submitRecords = () => {
         })
         x = finalReturn;
         console.log(finalReturn)
-        let i = 0;
         console.log(finalReturn.length == Object.keys(listOfStudents).length)
-
+        let i = -1;
         if (finalReturn.length == Object.keys(listOfStudents).length) {
             (Object.keys(listOfStudents)).forEach(studentId => {
+                i++;
                 console.log({
                     stdId: (studentId),
                     attStat: (finalReturn[i].attStat),
