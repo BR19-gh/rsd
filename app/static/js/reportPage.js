@@ -28,7 +28,6 @@ function fetchRecords() {
             }
 
             let records = responseJson;
-            setListOfStudents(responseJson)
             let tbody = document.querySelector("tbody");
             let numsOfStudents = Object.keys(records);
             tbody.innerHTML = '';
