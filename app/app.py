@@ -274,7 +274,7 @@ def record(idIn=None):
 
 @app.route("/records", methods=['GET'])
 @limiter.exempt
-def students():
+def records():
     recordObj = RecordsTable()
 
     result = recordObj.display()
