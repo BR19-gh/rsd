@@ -227,18 +227,8 @@ def record(idIn=None):
             revStat = unquote(data['revStat'])
             recordDate = unquote(data['recordDate'])
 
-            print(
-                {
-            id,
-            attStat,
-            memoStat,
-            revStat,
-            recordDate}
-            )
-
 
             try:
-                print("check 1")
                 recordObj.insert(id, attStat, memoStat, revStat, recordDate)
                 return jsonify({"msg": f"Success 201: record of stdId:{id} and recordDate:{recordDate} is recorded successfully.", "statCode": 201})
             except Exception as err:
@@ -279,6 +269,31 @@ def record(idIn=None):
                 
     except Exception as err:
         print(err, "line: 203")
+
+
+
+@app.route("/records", methods=['GET'])
+@limiter.exempt
+def students():
+    recordObj = RecordsTable()
+
+    result = recordObj.display()
+    dictOfResult = {}
+
+    j = 0
+    for i in result:
+        dictOfResult[i[0]] = {'stdId': i[0], 'attStat': i[1],
+                              'memoStat': i[2],'revStat': i[3], 
+                              'recordDate': i[4]}
+
+    newIndex = sorted(dictOfResult, key=lambda d: d)
+    dictOfResult = {k: dictOfResult[k] for k in newIndex}
+
+    if(dictOfResult == {}):
+        return jsonify({"msg": f"No Content 204: There is no content to get.", "statCode": 204})
+    else:
+        return jsonify(dictOfResult)
+
 ##############################
 ###### Backend Endpoints END ######
 ##############################

@@ -192,7 +192,7 @@ const submitRecords = () => {
     let valueOfinputForRev;
     let studentsIds = Object.keys(listOfStudents);
     studentsIds.forEach(studentId => {
-        console.log(studentId)
+
         let getOut = false;
 
         if (document.querySelector(`#attendenceSelect-${studentId}`).value == 0) {
@@ -225,20 +225,12 @@ const submitRecords = () => {
             revStat: (valueOfinputForRev),
             recordDate: (formatTheDate(new Date(), 'basic')),
         })
-        x = finalReturn;
-        console.log(finalReturn)
-        console.log(finalReturn.length == Object.keys(listOfStudents).length)
-        let i = -1;
+
+        let indexForRecords = -1;
         if (finalReturn.length == Object.keys(listOfStudents).length) {
             (Object.keys(listOfStudents)).forEach(studentId => {
-                i++;
-                console.log({
-                    stdId: (studentId),
-                    attStat: (finalReturn[i].attStat),
-                    memoStat: (finalReturn[i].memoStat),
-                    revStat: (finalReturn[i].revStat),
-                    recordDate: (finalReturn[i].recordDate),
-                }, i)
+                indexForRecords++;
+
                 fetch("/record", {
                         headers: {
                             stdId: encodeURIComponent(studentId),
@@ -253,35 +245,17 @@ const submitRecords = () => {
                         return response.json();
                     })
                     .then((responseJson) => {
-                        // if (responseJson.statCode == 403) {
-                        //     alert(
-                        //         "الرقم التعريفي للطالب المراد إضافته موجود مسبقا\nالرجاء المحاولة مجددًا باستخدام رقم آخر. \n\n ErrCode: 403-info"
-                        //     ) | $("#studentModal").modal("show");
-                        //     return;
-                        // }
-                        // if (responseJson.statCode == 400) {
-                        //     alert(
-                        //         "هناك مدخلات أُدخلت بشكل خاطئ\nالرقم التعريفي أُدخل فيه نص، يجب إدخاله على شكل رقم فقط. \n\n ErrCode: 400-info"
-                        //     ) | $("#studentModal").modal("show");
-                        //     return;
-                        // }
-                        // if (responseJson.statCode == 429) {
-                        //     alert(
-                        //         "لقد تجاوزت العدد المسموح من الطلبات على السيرفر في وقت معين،\n إنتظر قليلا ثم حاول الطلب مجددا. \n\n ErrCode: 429-info"
-                        //     ) | $("#studentModal").modal("show");
-                        //     return;
-                        // }
+
                         if (responseJson.statCode == "500") {
                             alert(
                                 "حدث خطأ من طرف السيرفر\nحاول مجددًا في وقت لاحق، إذا استمرت المشكلة، تواصل مع المطور. \n\n ErrCode: 530-info"
                             );
                             return;
                         }
-                        i++;
-                        console.log(i)
+
                         if (finalReturn.length == i) {
                             alert(
-                                `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات`
+                                `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات في التقرير`
                             );
                             location.reload();
                         }
