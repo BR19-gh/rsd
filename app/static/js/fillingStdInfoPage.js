@@ -84,7 +84,7 @@ function fetchStudents() {
         .then((responseJson) => {
             console.log(responseJson);
             if (responseJson.statCode == 204) {
-                studentForms.innerHTML = "حدث وانتظر قليلا إذا كنت قد أضفت";
+                formsContainer.innerHTML = "حدث وانتظر قليلا إذا كنت قد أضفت";
                 console.log(204)
                 return;
             }
