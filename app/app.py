@@ -292,6 +292,7 @@ def records():
         return jsonify({"msg": f"No Content 204: There is no content to get.", "statCode": 204})
     else:
         print(dictOfResult)
+        print(result)
         return jsonify(dictOfResult)
 
 ##############################

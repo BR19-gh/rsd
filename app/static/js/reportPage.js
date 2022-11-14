@@ -62,6 +62,7 @@ function fetchRecords() {
 const وجه = (num) => {
     if (num == 0) return `لم يحفظ`;
     if (num == 1) return `وجه واحد`;
+    if (num == 0.5) return `نصف وجه`;
     else if (num > 10) return `${num} وجه`;
     else if (num < 11 && num > 2) return `${num} أوجه`;
     else if (num == 2) return "وجهان";
