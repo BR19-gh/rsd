@@ -39,7 +39,7 @@ function fetchRecords() {
                     <td>${records[numOfStudent].stdId}</td>
                     <td>${records[numOfStudent].attStat}</td>
                     <td>${records[numOfStudent].memoStat}</td>
-                    <td>${records[numOfStudent].revStat}</td>
+                    <td>${وجه(records[numOfStudent].revStat)}</td>
                     <td>${records[numOfStudent].recordDate}</td>               
                 </tr>
         `;
@@ -56,6 +56,16 @@ function fetchRecords() {
             );
         });
 }
+
+
+// how to spell وجهs
+const وجه = (num) => {
+    if (num == 1) return `وجه واحد`;
+    else if (num > 10) return `${num} وجه`;
+    else if (num == 2) return "وجهان";
+    else return `${num} أوجه`;
+}
+
 
 
 

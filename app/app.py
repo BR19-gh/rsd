@@ -286,8 +286,8 @@ def records():
                               'memoStat': i[2],'revStat': i[3], 
                               'recordDate': i[4]}
 
-    newIndex = sorted(dictOfResult, key=lambda d: d)
-    dictOfResult = {k: dictOfResult[k] for k in newIndex}
+    # newIndex = sorted(dictOfResult, key=lambda d: d)
+    # dictOfResult = {k: dictOfResult[k] for k in newIndex}
 
     if(dictOfResult == {}):
         return jsonify({"msg": f"No Content 204: There is no content to get.", "statCode": 204})
