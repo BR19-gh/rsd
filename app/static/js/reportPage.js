@@ -36,7 +36,7 @@ function fetchRecords() {
                 tbody.innerHTML +=
                     `
                 <tr>
-                    <th scope="row">${records[numOfStudent].stdId}</th>
+                    <td>${records[numOfStudent].stdId}</td>
                     <td>${records[numOfStudent].attStat}</td>
                     <td>${records[numOfStudent].memoStat}</td>
                     <td>${records[numOfStudent].revStat}</td>

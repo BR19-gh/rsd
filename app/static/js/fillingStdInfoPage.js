@@ -106,7 +106,7 @@ function fetchStudents() {
                 tbody.innerHTML +=
                     `
                 <tr>
-                    <th scope="row">${studentInfo[numOfStudent].id}</th>
+                    <td>${studentInfo[numOfStudent].id}</td>
                     <td>${studentInfo[numOfStudent].name}</td>
                     <td>${جزء(studentInfo[numOfStudent].partsTotal.length,studentInfo[numOfStudent].partsTotal)}</td>
                     <td>

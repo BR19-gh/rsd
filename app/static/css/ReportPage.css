@@ -190,3 +190,8 @@ div#studentForms {
     height: 640px;
     margin-top: 5px;
 }
+
+td {
+    font-size: 10px;
+    font-weight: bolder;
+}
