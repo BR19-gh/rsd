@@ -38,7 +38,7 @@ function fetchRecords() {
                 <tr>
                     <td>${records[numOfStudent].stdId}</td>
                     <td>${records[numOfStudent].attStat}</td>
-                    <td>${records[numOfStudent].memoStat}</td>
+                    <td>${وجه(records[numOfStudent].memoStat)}</td>
                     <td>${وجه(records[numOfStudent].revStat)}</td>
                     <td>${records[numOfStudent].recordDate}</td>               
                 </tr>
@@ -60,10 +60,12 @@ function fetchRecords() {
 
 // how to spell وجهs
 const وجه = (num) => {
+    if (num == 0) return `لم يحفظ`;
     if (num == 1) return `وجه واحد`;
     else if (num > 10) return `${num} وجه`;
+    else if (num < 11 && num > 2) return `${num} أوجه`;
     else if (num == 2) return "وجهان";
-    else return `${num} أوجه`;
+    else return `${num}`;
 }
 
 

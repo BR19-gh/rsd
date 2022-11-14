@@ -123,7 +123,7 @@ function fetchStudents() {
                         <div class="form-group">
                             <label for="Attendence">الحضور</label>
                             <select onclick="showOrHideRevMemo(${numOfStudent})" id="attendenceSelect-${numOfStudent}" class="form-select form-control " aria-label="Default select example ">
-                            <option value="0" disabled selected>اختر حالة حضور الطالب</option>
+                            <option value="99" disabled selected>اختر حالة حضور الطالب</option>
                             <option value="حاضر">حاضر</option>
                             <option value="متأخر">متأخر</option>
                             <option value="غائب بعذر">غائب بعذر</option>
@@ -136,11 +136,11 @@ function fetchStudents() {
                         <div class="form-group ">
                             <label for="Memorizing ">الحفظ</label>
                             <select id="memorizingSelect-${numOfStudent}" class="form-select form-control" aria-label="Default select example ">
-                            <option value="0" disabled selected>اختر حالة حفظ الطالب</option>
-                            <option value="لم يحفظ">لم يحفظ</option>
-                            <option value="نصف وجه">نصف وجه</option>
-                            <option value="وجه واحد">وجه واحد</option>
-                            <option value="وجهان">وجهان</option>
+                            <option value="99" disabled selected>اختر حالة حفظ الطالب</option>
+                            <option value="لم يحفظ">0</option>
+                            <option value="نصف وجه">0.5</option>
+                            <option value="وجه واحد">1</option>
+                            <option value="وجهان">2</option>
                         </select>
                         </div>
                     </div>

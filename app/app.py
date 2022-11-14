@@ -285,13 +285,13 @@ def records():
         dictOfResult[i[0]] = {'stdId': i[0], 'attStat': i[1],
                               'memoStat': i[2],'revStat': i[3], 
                               'recordDate': i[4]}
-
     # newIndex = sorted(dictOfResult, key=lambda d: d)
     # dictOfResult = {k: dictOfResult[k] for k in newIndex}
 
     if(dictOfResult == {}):
         return jsonify({"msg": f"No Content 204: There is no content to get.", "statCode": 204})
     else:
+        print(dictOfResult)
         return jsonify(dictOfResult)
 
 ##############################
