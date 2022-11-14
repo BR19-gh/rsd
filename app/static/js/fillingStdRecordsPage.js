@@ -262,8 +262,10 @@ const submitRecords = () => {
                             );
                             return;
                         }
-
-                        if (finalReturn.length == indexForRecords - 1) {
+                        console.log((finalReturn.length - 1 == indexForRecords))
+                        console.log((finalReturn.length - 1))
+                        console.log((indexForRecords))
+                        if (finalReturn.length - 1 == indexForRecords) {
                             alert(
                                 `تم إضافة ${سجل(finalReturn.length)} لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات في التقرير`
                             );
