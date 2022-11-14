@@ -136,7 +136,7 @@ function fetchStudents() {
                         <div class="form-group ">
                             <label for="Memorizing ">الحفظ</label>
                             <select id="memorizingSelect-${numOfStudent}" class="form-select form-control" aria-label="Default select example ">
-                            <option value="0" disabled selected>اختر حالة حفظ الطالب</option>
+                            <option value="لم يحفظ" disabled selected>اختر حالة حفظ الطالب</option>
                             <option value="0">لم يحفظ</option>
                             <option value="0.5">نصف وجه</option>
                             <option value="1">وجه واحد</option>
@@ -262,10 +262,10 @@ const submitRecords = () => {
                             );
                             return;
                         }
-                        console.log((finalReturn.length - 1 == indexForRecords))
-                        console.log((finalReturn.length - 1))
+                        console.log((finalReturn.length == indexForRecords))
+                        console.log((finalReturn.length))
                         console.log((indexForRecords))
-                        if (finalReturn.length - 1 == indexForRecords) {
+                        if (finalReturn.length == indexForRecords) {
                             alert(
                                 `تم إضافة ${سجل(finalReturn.length)} لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات في التقرير`
                             );
