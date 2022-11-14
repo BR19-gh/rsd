@@ -137,10 +137,10 @@ function fetchStudents() {
                             <label for="Memorizing ">الحفظ</label>
                             <select id="memorizingSelect-${numOfStudent}" class="form-select form-control" aria-label="Default select example ">
                             <option value="99" disabled selected>اختر حالة حفظ الطالب</option>
-                            <option value="لم يحفظ">0</option>
-                            <option value="نصف وجه">0.5</option>
-                            <option value="وجه واحد">1</option>
-                            <option value="وجهان">2</option>
+                            <option value="0">لم يحفظ</option>
+                            <option value="0.5">لم يحفظ</option>
+                            <option value="1">وجه واحد</option>
+                            <option value="">وجهان</option>
                         </select>
                         </div>
                     </div>
