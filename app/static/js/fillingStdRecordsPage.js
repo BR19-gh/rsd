@@ -234,10 +234,10 @@ const submitRecords = () => {
                 fetch("/record", {
                         headers: {
                             stdId: encodeURIComponent(studentId),
-                            attStat: encodeURIComponent(finalReturn[i].attStat),
-                            memoStat: encodeURIComponent(finalReturn[i].memoStat),
-                            revStat: encodeURIComponent(finalReturn[i].revStat),
-                            recordDate: encodeURIComponent(finalReturn[i].recordDate),
+                            attStat: encodeURIComponent(finalReturn[indexForRecords].attStat),
+                            memoStat: encodeURIComponent(finalReturn[indexForRecords].memoStat),
+                            revStat: encodeURIComponent(finalReturn[indexForRecords].revStat),
+                            recordDate: encodeURIComponent(finalReturn[indexForRecords].recordDate),
                         },
                         method: "POST",
                     })
@@ -253,7 +253,7 @@ const submitRecords = () => {
                             return;
                         }
 
-                        if (finalReturn.length == i) {
+                        if (finalReturn.length == indexForRecords) {
                             alert(
                                 `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات في التقرير`
                             );
