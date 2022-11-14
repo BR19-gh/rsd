@@ -186,7 +186,17 @@ function fetchStudents() {
             );
         });
 }
-let x;
+
+
+// how to spell سجلs
+const سجل = (num) => {
+    if (num == 1) return `سجل واحد`;
+    else if (num > 10) return `${num} سجل`;
+    else if (num == 2) return "سجلان";
+    else return `${num} سجلات`;
+}
+
+
 const submitRecords = () => {
     let finalReturn = [];
     let valueOfinputForRev;
@@ -196,14 +206,14 @@ const submitRecords = () => {
         let getOut = false;
 
         if (document.querySelector(`#attendenceSelect-${studentId}`).value == 0) {
-            alert("يجب تعبئة جميع سجلات الطلاب أولا, 1");
+            alert("يجب تعبئة جميع سجلات الطلاب أولا");
             return getOut;
 
         }
         if (document.querySelector(`#memorizingSelect-${studentId}`).value == 0 && document.querySelector(`#attendenceSelect-${studentId}`).value != "غائب بعذر" && document.querySelector(`#attendenceSelect-${studentId}`).value != "غائب بدون عذر") {
 
             if (listOfStudents[studentId].partsTotal.length < 30) {
-                alert("يجب تعبئة جميع سجلات الطلاب أولا, 2");
+                alert("يجب تعبئة جميع سجلات الطلاب أولا");
                 return getOut;
             }
 
@@ -211,7 +221,7 @@ const submitRecords = () => {
         if (document.querySelector(`#checkboxForRev-${studentId}`).checked) {
 
             if (document.querySelector(`#inputForRev-${studentId}`) == "") {
-                alert("يجب تعبئة جميع سجلات الطلاب أولا, 3");
+                alert("يجب تعبئة جميع سجلات الطلاب أولا");
                 return getOut;
             }
             valueOfinputForRev = document.querySelector(`#inputForRev-${studentId}`).value;
@@ -253,9 +263,9 @@ const submitRecords = () => {
                             return;
                         }
 
-                        if (finalReturn.length == indexForRecords) {
+                        if (finalReturn.length == indexForRecords - 1) {
                             alert(
-                                `تم إضافة سجلات الطلاب لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات في التقرير`
+                                `تم إضافة ${سجل(finalReturn.length)} لتاريخ ${formatTheDate(new Date(), 1)} بنجاح، إنتظر قليلا وستظهر التحديثات في التقرير`
                             );
                             location.reload();
                         }
