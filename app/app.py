@@ -11,6 +11,7 @@ from flask_cors import CORS, cross_origin
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from urllib.parse import unquote
+from datetime import datetime
 
 from .models import *
 from .other import *
@@ -280,13 +281,28 @@ def records():
     result = recordObj.display()
     dictOfResult = {}
 
+
+
     j = 0
     for i in result:
-        dictOfResult[i[0]] = {'stdId': i[0], 'attStat': i[1],
-                              'memoStat': i[2],'revStat': i[3], 
-                              'recordDate': i[4]}
-    # newIndex = sorted(dictOfResult, key=lambda d: d)
-    # dictOfResult = {k: dictOfResult[k] for k in newIndex}
+            dictOfResult[j] = {'stdId': i[0], 'attStat': i[1],
+                                'memoStat': i[2],'revStat': i[3], 
+                                'recordDate': i[4]}
+            j = j+1
+
+
+    # sorting dates
+    listOfdates=[]
+    for key in list(dictOfResult.keys()):
+        listOfdates.append(dictOfResult[key]["recordDate"])
+    listOfdates.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))    
+    k=0
+    for date in listOfdates:
+        dictOfResult[k]["recordDate"] = date
+        k = k+1
+    for key in list(dictOfResult.keys()):
+        print(dictOfResult[key]["recordDate"])
+
 
     if(dictOfResult == {}):
         return jsonify({"msg": f"No Content 204: There is no content to get.", "statCode": 204})
@@ -294,7 +310,6 @@ def records():
         print(dictOfResult)
         print(result)
         return jsonify(dictOfResult)
-
 ##############################
 ###### Backend Endpoints END ######
 ##############################
