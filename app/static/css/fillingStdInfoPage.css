@@ -84,7 +84,6 @@ label.radio input:checked+span {
 
 .studentForms {
     width: 100%;
-    height: 640px;
     margin-top: 5px;
     backdrop-filter: blur(10px) contrast(100%);
     background-color: #ffffff86;
