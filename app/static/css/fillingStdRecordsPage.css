@@ -80,9 +80,9 @@ label.radio input:checked+span {
 }
 
 .studentForms {
+    backdrop-filter: blur(10px) contrast(100%);
     height: 475px;
     margin-bottom: 25px;
-    /* background-image: linear-gradient(to top right, #88df94, #dbc68a); */
     background-color: #ffffff86;
     transition: all 100ms ease-in-out;
 }
