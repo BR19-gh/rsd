@@ -300,15 +300,12 @@ def records():
     for date in listOfdates:
         dictOfResult[k]["recordDate"] = date
         k = k+1
-    for key in list(dictOfResult.keys()):
-        print(dictOfResult[key]["recordDate"])
 
 
     if(dictOfResult == {}):
         return jsonify({"msg": f"No Content 204: There is no content to get.", "statCode": 204})
     else:
-        print(dictOfResult)
-        print(result)
+
         return jsonify(dictOfResult)
 ##############################
 ###### Backend Endpoints END ######
