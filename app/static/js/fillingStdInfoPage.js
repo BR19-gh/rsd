@@ -110,10 +110,10 @@ function fetchStudents() {
                     <td>${studentInfo[numOfStudent].name}</td>
                     <td>${جزء(studentInfo[numOfStudent].partsTotal.length,studentInfo[numOfStudent].partsTotal)}</td>
                     <td>
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit')"> 
+                        <div class="iconBtns" data-bs-toggle="modal" data-bs-target="#studentModal" title="تعديل" onclick="deleteOrEditstudent(${numOfStudent}, 'edit')"> 
                             تعديل <i class="icon fas fa-edit"></i> 
                         </div>
-                        <div data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete')"> 
+                        <div class="iconBtns" data-bs-toggle="modal" data-bs-target="#studentModal" title="حذف" onclick="deleteOrEditstudent(${numOfStudent}, 'delete')"> 
                             حــذف <i class="icon fas fa-trash-alt"></i> 
                         </div> 
                     </td>                      
